@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1061847055840",
+    "project_id": "what-would-you-drink",
+    "storage_bucket": "what-would-you-drink.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061847055840:android:f88fb7393a564942f2ff85",
+        "android_client_info": {
+          "package_name": "com.kacperkukulka.what_would_you_drink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061847055840-cq4tqevfrh4ug27v1ha4dfua1682a2fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTXGCstCwvkb2Lg9nmEBlHaEMt_9M5DjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061847055840-cq4tqevfrh4ug27v1ha4dfua1682a2fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
