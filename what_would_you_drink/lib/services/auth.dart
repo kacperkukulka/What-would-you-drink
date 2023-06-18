@@ -30,8 +30,31 @@ class AuthService {
     }
   }
   // sign in with email and pass
+  Future singInUserPass(String email, String pass) async {
+    try{
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: pass);
+      User? user = result.user;
+      return _lightUserFromUser(user);
+    }
+    catch(err){
+      debugPrint('Could not log in: ${err.toString()}');
+      return null;
+    }
+  }
 
   // register with email and pass
+
+  Future register(String email, String pass) async {
+    try{
+      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: pass);
+      User? user = result.user;
+      return _lightUserFromUser(user);
+    }
+    catch(err){
+      debugPrint('Could not register: ${err.toString()}');
+      return null;
+    }
+  }
 
   // sign out
   Future singOut() async {

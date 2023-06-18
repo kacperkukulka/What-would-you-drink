@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
           ),
           appBarTheme: AppBarTheme(
             backgroundColor: dc.colorAppBar,
+            foregroundColor: dc.colorTextSecondary,
           )
         ),
         home: Wrapper(),
