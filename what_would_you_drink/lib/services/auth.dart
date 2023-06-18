@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:what_would_you_drink/models/light_user.dart';
+import 'package:what_would_you_drink/services/database.dart';
 
 class AuthService {
 
@@ -48,6 +49,13 @@ class AuthService {
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: pass);
       User? user = result.user;
+      if(user != null){
+        await DatabaseService(uid: user.uid).addOrUpdate(
+          name: user.email!.split('@')[0],
+          strength: 100,
+          sugars: 0
+        );
+      }
       return _lightUserFromUser(user);
     }
     catch(err){
