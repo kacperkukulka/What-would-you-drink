@@ -16,3 +16,16 @@ var textInputDecoration = InputDecoration(
     ),
   ),
 );
+
+Container textForm({required String text}){
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 10.0),
+    child: Text(
+      text,
+      style: const TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.bold
+      ),
+    ),
+  );
+}

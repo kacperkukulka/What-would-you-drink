@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:what_would_you_drink/models/brew.dart';
+import 'package:what_would_you_drink/models/light_user.dart';
 
 class DatabaseService {
   final String? uid;
@@ -31,5 +32,21 @@ class DatabaseService {
         )  
       )
       .toList();
+  }
+
+  Stream<UserData> get userData{
+    return collection.doc(uid).snapshots()
+      .map(_userDataFromSnapshot);
+  }
+
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
+    return UserData(
+      uid: uid!, 
+      brew: Brew(
+        name: snapshot.get('name'),
+        strength: snapshot.get('strength'),
+        sugars: snapshot.get('sugars')
+      ) 
+    );
   }
 }
