@@ -1,13 +1,18 @@
 class Brew{
-  
-  final String name;
+  final String type;
   final int sugars;
   final int strength;
+  final bool isActual;
+  final String userId;
+  final String? roomId;
 
   Brew({
-    required this.name, 
+    required this.type, 
     required this.sugars, 
-    required this.strength
+    required this.strength,
+    required this.isActual,
+    required this.userId,
+    required this.roomId
   });
 
   String sugarStringPL(){
