@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:what_would_you_drink/models/brew.dart';
-import 'package:what_would_you_drink/models/light_user.dart';
-import 'package:what_would_you_drink/models/room.dart';
-import 'package:what_would_you_drink/models/user.dart';
 import 'package:what_would_you_drink/services/database.dart';
 
 class BrewService {
@@ -69,16 +66,6 @@ class BrewService {
       .toList();
   }
 
-  List<Room> _snapshotToRoom(QuerySnapshot snapshot){
-    return snapshot.docs
-      .map((s) => Room(
-        uid: s.reference.id,
-        creationDate: s.get('creationDate') ?? Timestamp.now(),
-        name: s.get('name') ?? 'default',
-        userId: s.get('userId')
-      )).toList();
-  }
-
   Brew _snapshotToUserBrew(QuerySnapshot snapshot){
     var data = snapshot.docs[0];
     return Brew(
@@ -90,16 +77,4 @@ class BrewService {
       type: data.get('type')
     );
   }
-
-  // Stream<UserData> get userData{
-  //   return _database.userCollection.doc(uid).snapshots()
-  //     .map(_userDataFromSnapshot);
-  // }
-
-  // UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
-  //   return UserData(
-  //     uid: uid!, 
-  //     brew: 
-  //   );
-  // }
 }

@@ -1,11 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:what_would_you_drink/screens/room/setting_form.dart';
 import 'package:what_would_you_drink/services/auth.dart';
 import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;
 import 'package:what_would_you_drink/services/brewService.dart';
-import 'package:what_would_you_drink/services/roomService.dart';
 import 'brew_list.dart';
 import 'package:what_would_you_drink/models/brew.dart';
 
@@ -17,9 +15,9 @@ class RoomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService _auth = AuthService();
+    final AuthService auth = AuthService();
 
-    void _showSettingsPanel(){
+    void showSettingsPanel(){
       showModalBottomSheet(context: context, builder: ((context){
         return SettingsForm(roomId: uid);
       }));
@@ -40,14 +38,14 @@ class RoomWidget extends StatelessWidget {
                 foregroundColor: MaterialStatePropertyAll(dc.colorTextPrimary)
               ),
               onPressed: () async {
-                await _auth.singOut();
+                await auth.singOut();
               }, 
               icon: const Icon(Icons.person_outline_outlined), 
               label: const Text('Wyloguj się'),
             ),
             IconButton(
               onPressed: (){
-                _showSettingsPanel();
+                showSettingsPanel();
               }, 
               icon: const Icon(Icons.settings),
               color: dc.colorTextPrimary,

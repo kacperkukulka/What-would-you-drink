@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:what_would_you_drink/models/brew.dart';
 import 'package:what_would_you_drink/models/light_user.dart';
 import 'package:what_would_you_drink/screens/shared/loading.dart';
-import 'package:what_would_you_drink/services/auth.dart';
-import 'package:what_would_you_drink/services/brewService.dart';
-import 'package:what_would_you_drink/services/database.dart';
 import 'package:what_would_you_drink/shared/constants.dart';
 import 'package:provider/provider.dart';
-import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;
 
 import '../../models/user.dart';
 import '../../services/userService.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:what_would_you_drink/models/light_user.dart';
-import 'package:what_would_you_drink/screens/authenticate/authenticate.dart';
 import 'package:what_would_you_drink/screens/shared/loading.dart';
 import 'package:what_would_you_drink/services/auth.dart';
 import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:what_would_you_drink/models/brew.dart';
 import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;
 import 'package:what_would_you_drink/models/room.dart';
-import 'package:what_would_you_drink/screens/home/home.dart';
 import 'package:what_would_you_drink/screens/room/room_widget.dart';
 import 'package:what_would_you_drink/services/roomService.dart';
 import 'package:what_would_you_drink/services/userService.dart';

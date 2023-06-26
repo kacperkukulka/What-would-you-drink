@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: dc.colorTextSecondary,
           )
         ),
-        home: Wrapper(),
+        home: const Wrapper(),
       ),
     );
   }

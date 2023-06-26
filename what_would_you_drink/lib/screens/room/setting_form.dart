@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:what_would_you_drink/models/brew.dart';
 import 'package:what_would_you_drink/models/light_user.dart';
 import 'package:what_would_you_drink/screens/shared/loading.dart';
-import 'package:what_would_you_drink/services/auth.dart';
-import 'package:what_would_you_drink/services/brewService.dart';
-import 'package:what_would_you_drink/services/database.dart';
+import 'package:what_would_you_drink/services/brew_service.dart';
 import 'package:what_would_you_drink/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;
@@ -38,13 +36,6 @@ class _SettingsFormState extends State<SettingsForm> {
               key: formKey,
               child: Column(
                 children: [
-                  // textForm(text: 'Nazwa użytkownika'),
-                  // TextFormField(
-                  //   initialValue: userBre,
-                  //   decoration: textInputDecoration,
-                  //   validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
-                  //   onChanged: (val) => currentName = val,
-                  // ),
                   textForm(text: 'Jak mocna?'),
                   Slider(
                     value: (currentStrength ?? userBrew.strength).toDouble(),

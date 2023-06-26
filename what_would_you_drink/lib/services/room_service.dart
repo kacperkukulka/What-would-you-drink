@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:what_would_you_drink/models/brew.dart';
-import 'package:what_would_you_drink/models/light_user.dart';
 import 'package:what_would_you_drink/models/room.dart';
-import 'package:what_would_you_drink/models/user.dart';
 import 'package:what_would_you_drink/services/database.dart';
 
 class RoomService {
@@ -53,30 +50,6 @@ class RoomService {
     }
   }
 
-  // Future addOrUpdate({required int sugars, required String name, required int strength}) async {
-  //   // also creates a record if it does not exist 
-  //   return await _database.brewCollection.doc(uid).set({
-  //     'sugars' : sugars,
-  //     'name': name,
-  //     'strength' : strength
-  //   });
-  // }
-
-  // List<Brew> _snapshotToBrew(QuerySnapshot snapshot){
-  //   return snapshot.docs
-  //     .map((s) => 
-  //       Brew(
-  //         isActual: s.get('isActual') ?? true,
-  //         roomId: s.get('roomId'),
-  //         type: s.get('type') ?? 'coffee',
-  //         userId: s.get('userId') ?? uid,
-  //         strength: s.get('strength') ?? 0,
-  //         sugars: s.get('sugars') ?? '0'
-  //       )  
-  //     )
-  //     .toList();
-  // }
-
   List<Room> _snapshotToRoom(QuerySnapshot snapshot){
     return snapshot.docs
       .map((s) => Room(
@@ -86,16 +59,4 @@ class RoomService {
         userId: s.get('userId')
       )).toList();
   }
-
-  // Stream<UserData> get userData{
-  //   return _database.userCollection.doc(uid).snapshots()
-  //     .map(_userDataFromSnapshot);
-  // }
-
-  // UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
-  //   return UserData(
-  //     uid: uid!, 
-  //     brew: 
-  //   );
-  // }
 }
