@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:what_would_you_drink/models/light_user.dart';
 import 'package:what_would_you_drink/models/room.dart';
+import 'package:what_would_you_drink/screens/home/room_tabs.dart';
 import 'package:what_would_you_drink/services/auth.dart';
 import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;
 import 'package:what_would_you_drink/services/database.dart';
@@ -34,10 +36,9 @@ class Home extends StatelessWidget {
       initialData: List<Room>.empty(),
       value: RoomService().allRooms,
       child: Scaffold(
-        backgroundColor: dc.colorBgDark,
         appBar: AppBar(
           backgroundColor: dc.colorAppBar,
-          title: const Text('Home'),
+          title: const Text('Pokoje'),
           elevation: 0.0,
           actions: <Widget>[
             TextButton.icon(
@@ -59,7 +60,24 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: RoomList(),
+        body: DefaultTabController(
+          length: 3, 
+          child: Scaffold(
+            backgroundColor: dc.colorBgDark,
+            appBar: AppBar(
+              elevation: 0.0,
+              backgroundColor: dc.colorPrimary,
+              title: const TabBar(
+                indicatorColor: dc.colorTextPrimary,
+                tabs: [
+                  Tab(text: "Wszystkie",),
+                  Tab(text: "Twoje"),
+                  Tab(text: "Uczestnictwo",)
+                ],
+              ),
+            ),
+            body: const RoomTabs()
+          )),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
             showAddRoomPanel();

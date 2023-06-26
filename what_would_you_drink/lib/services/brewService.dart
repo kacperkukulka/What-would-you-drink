@@ -35,6 +35,12 @@ class BrewService {
       .map(_snapshotToBrew);
   }
 
+  Future<List<Brew>> userBrews() async {
+    return await _database.brewCollection
+      .where('userId', isEqualTo: userId)
+      .get().then(_snapshotToBrew);
+  }
+
   Future addOrUpdate({required int sugars, required int strength}) async {
     // also creates a record if it does not exist 
     return await _database.brewCollection.doc(roomId).set({

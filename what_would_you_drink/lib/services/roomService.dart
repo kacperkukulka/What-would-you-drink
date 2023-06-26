@@ -21,11 +21,16 @@ class RoomService {
       .map(_snapshotToRoom);
   }
 
+  Stream<List<String>> get userJoinedRoomsIds {
+    return _database.brewCollection.where('userId', isEqualTo: uid).snapshots()
+      .map((event) => event.docs.map((e) => e.get('roomId') as String).toList());
+  }
+
   Future<String> addRoom({required String name, required String userId}) async {
     var room = await _database.roomCollection.add({
       'name' : name,
       'userId' : userId,
-      'creationDate' : Timestamp.now()
+      'creationDate' : Timestamp.now(),
     });
     return room.id;
   }

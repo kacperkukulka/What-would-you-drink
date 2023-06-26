@@ -54,7 +54,7 @@ class RoomWidget extends StatelessWidget {
             )
           ],
         ),
-        body: BrewList(),
+        body: const BrewList(),
       ),
     );
   }
