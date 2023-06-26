@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:what_would_you_drink/models/light_user.dart';
 import 'package:what_would_you_drink/models/room.dart';
 import 'package:what_would_you_drink/screens/shared/loading.dart';
-import 'package:what_would_you_drink/services/roomService.dart';
+import 'package:what_would_you_drink/services/room_service.dart';
 import 'room_list.dart';
 
 class RoomTabs extends StatelessWidget {

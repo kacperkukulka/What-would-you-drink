@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:what_would_you_drink/models/brew.dart';
 import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;
 import 'package:what_would_you_drink/models/user.dart';
-import 'package:what_would_you_drink/services/userService.dart';
+import 'package:what_would_you_drink/services/user_service.dart';
 
 class BrewTile extends StatelessWidget {
   const BrewTile({super.key, required this.brew});

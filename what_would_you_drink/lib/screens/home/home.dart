@@ -4,7 +4,7 @@ import 'package:what_would_you_drink/models/room.dart';
 import 'package:what_would_you_drink/screens/home/room_tabs.dart';
 import 'package:what_would_you_drink/services/auth.dart';
 import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;
-import 'package:what_would_you_drink/services/roomService.dart';
+import 'package:what_would_you_drink/services/room_service.dart';
 import 'add_room.dart';
 import 'package:what_would_you_drink/screens/home/setting_form.dart';
 
@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService _auth = AuthService();
+    final AuthService auth = AuthService();
 
     void showSettingsPanel(){
       showModalBottomSheet(context: context, builder: ((context){
@@ -41,7 +41,7 @@ class Home extends StatelessWidget {
                 foregroundColor: MaterialStatePropertyAll(dc.colorTextPrimary)
               ),
               onPressed: () async {
-                await _auth.singOut();
+                await auth.singOut();
               }, 
               icon: const Icon(Icons.person_outline_outlined), 
               label: const Text('Wyloguj się'),

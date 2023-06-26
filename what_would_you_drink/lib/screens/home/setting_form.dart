@@ -5,7 +5,7 @@ import 'package:what_would_you_drink/shared/constants.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/user.dart';
-import '../../services/userService.dart';
+import '../../services/user_service.dart';
 
 class SettingsForm extends StatefulWidget {
   const SettingsForm({super.key});

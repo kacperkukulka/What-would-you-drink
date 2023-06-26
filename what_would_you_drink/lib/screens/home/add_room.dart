@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:what_would_you_drink/models/light_user.dart';
-import 'package:what_would_you_drink/services/roomService.dart';
+import 'package:what_would_you_drink/services/room_service.dart';
 import 'package:what_would_you_drink/shared/constants.dart';
 import 'package:provider/provider.dart';
 

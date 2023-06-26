@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:what_would_you_drink/models/room.dart';
+import 'package:what_would_you_drink/services/brew_service.dart';
 import 'package:what_would_you_drink/services/database.dart';
 
 class RoomService {
@@ -30,6 +31,15 @@ class RoomService {
       'creationDate' : Timestamp.now(),
     });
     return room.id;
+  }
+
+  Future removeRoom() async {
+    var brews = await _database.brewCollection.where('roomId', isEqualTo: uid)
+      .get();
+    for(var brew in brews.docs){
+      await _database.brewCollection.doc(brew.reference.id).delete();
+    }
+    await _database.roomCollection.doc(uid).delete();
   }
 
   void addIfNotExist(String userId) async {

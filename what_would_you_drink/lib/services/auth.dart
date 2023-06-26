@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:what_would_you_drink/models/light_user.dart';
-import 'package:what_would_you_drink/services/userService.dart';
+import 'package:what_would_you_drink/services/user_service.dart';
 
 class AuthService {
 
