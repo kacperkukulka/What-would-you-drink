@@ -50,7 +50,12 @@ class _RegisterState extends State<Register> {
               const SizedBox(height: 40.0,),
               //username
               TextFormField(
-                validator: (value) => value!.isEmpty ? "Pole nie może być puste" : null,
+                validator: (value) {
+                  if(value!.isEmpty) return "Pole nie może być puste";
+                  RegExp emailReg = RegExp(r"^[0-9A-Za-z.!#$%&'*+-/=?^_`{|}~]+@[0-9A-Z-a-z-]+(?:\.[0-9A-Z-a-z-]+)*$");
+                  if(!emailReg.hasMatch(value)) return "Email posiada niepoprawną składnie";
+                  return null;
+                },
                 controller: emailController,
                 decoration: textInputDecoration.copyWith(hintText: "Email"),
               ),

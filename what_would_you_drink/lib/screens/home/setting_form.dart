@@ -1,8 +1,12 @@
+import 'dart:math';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:what_would_you_drink/models/light_user.dart';
 import 'package:what_would_you_drink/screens/shared/loading.dart';
 import 'package:what_would_you_drink/shared/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../models/user.dart';
 import '../../services/user_service.dart';
@@ -18,6 +22,8 @@ class _SettingsFormState extends State<SettingsForm> {
   String? currentName;
   late String nameBefore;
   var formKey = GlobalKey<FormState>();
+  int currentAvatar = 0;
+  List avatarList = List.generate(10, (_) => Random().nextInt(999999));
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +50,29 @@ class _SettingsFormState extends State<SettingsForm> {
                     onChanged: (val) => currentName = val,
                   ),
                   const SizedBox(height: 10.0,),
+                  textForm(text: "Avatar"),
+                  Expanded(
+                    child: CarouselSlider.builder(
+                      itemCount: 10, 
+                      itemBuilder: (context, index, _) => 
+                        ClipOval(
+                          child: SvgPicture.network(
+                            'https://api.dicebear.com/6.x/adventurer/svg?seed=${avatarList[index]}', 
+                            width: 200,
+                            fit: BoxFit.cover,
+                          )
+                        ), 
+                      options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        enlargeFactor: 0.4,
+                        viewportFraction: 0.5,
+                        onPageChanged: (index, reason) {
+                          currentAvatar = index;
+                        },
+                        initialPage: 0
+                      ),
+                    ),
+                  ),
                   ElevatedButton(
                     onPressed: () async {
                       if(formKey.currentState == null) return;

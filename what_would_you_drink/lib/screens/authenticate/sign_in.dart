@@ -77,12 +77,22 @@ class _SignInState extends State<SignIn> {
                   setState(() => loading = true);
                   String email = emailController.value.text;
                   String pass = passController.value.text;
-                  LightUser? lightUser = await _auth.singInUserPass(email, pass);
-                  if(lightUser == null){ 
-                    setState((){
-                      errMsg = 'Dane logowania są niepoprawne';
+                  RegExp emailReg = RegExp(r"^[0-9A-Za-z.!#$%&'*+-/=?^_`{|}~]+@[0-9A-Z-a-z-]+(?:\.[0-9A-Z-a-z-]+)*$");
+                  if(!emailReg.hasMatch(email)){
+                    setState(() {
+                      errMsg = 'Email posiada niepoprawną składnie';
                       loading = false;
-                    }); 
+                    });
+                  }
+                  else{
+                    LightUser? lightUser = await _auth.singInUserPass(email, pass);
+                    if(lightUser == null){ 
+                      setState((){
+                        errMsg = 'Dane logowania są niepoprawne';
+                        loading = false;
+                        return;
+                      }); 
+                    }
                   }
                 }, 
                 child: const Text('Zaloguj się')
