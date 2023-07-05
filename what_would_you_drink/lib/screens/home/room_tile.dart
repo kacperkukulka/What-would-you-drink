@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;
 import 'package:what_would_you_drink/models/room.dart';
@@ -68,31 +69,37 @@ class RoomTile extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 10.0,),
-        ListTile(
-          tileColor: dc.colorBg,
-          title: Text(room.name),
-          subtitle: StreamBuilder<UserDb>(
-            stream: UserService(uid: room.userId).user, 
-            builder: (context, snapshot) {
-              if(snapshot.hasData){
-                return Text(snapshot.data!.name);
-              }
-              return const Text('...');
-            },
-          ),
-          leading: CircleAvatar(
-            backgroundColor: Colors.brown[100],
-          ),
-          trailing: room.userId == Provider.of<LightUser?>(context)!.uid ?
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                goToRoomButton(),
-                deleteRoomButton()
-              ]
-            ) : goToRoomButton(),
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
-        ),
+        StreamBuilder<UserDb>(
+          stream: UserService(uid: room.userId).user,
+          builder: (context, snapshot) {
+            if(snapshot.hasData){
+              return ListTile(
+                visualDensity: const VisualDensity(vertical: 4),
+                tileColor: dc.colorBg,
+                title: Text(room.name),
+                subtitle: Text(snapshot.data!.name),
+                leading: LayoutBuilder(
+                  builder: (p0, p1) => ClipOval(
+                    child: SvgPicture.network(
+                      'https://api.dicebear.com/6.x/adventurer/svg?seed=${snapshot.data!.pictureId}', 
+                      height: p1.maxHeight,
+                    )
+                  ),
+                ),
+                trailing: room.userId == Provider.of<LightUser?>(context)!.uid ?
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      goToRoomButton(),
+                      deleteRoomButton()
+                    ]
+                  ) : goToRoomButton(),
+                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              );
+            }
+            return const ListTile();
+          }
+        )
       ],
     );
   }

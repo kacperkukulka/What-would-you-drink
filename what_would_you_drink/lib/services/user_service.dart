@@ -13,14 +13,15 @@ class UserService {
       .map(_snapshotToUser);
   } 
 
-  Future addOrUpdate({required String name}) async {
+  Future addOrUpdate({required String name, required int pictureId}) async {
     // also creates a record if it does not exist 
     return await _database.userCollection.doc(uid).set({
       'name': name,
+      'pictureId': pictureId
     });
   }
 
   UserDb _snapshotToUser(DocumentSnapshot snapshot){
-    return UserDb(name: snapshot.get('name'));
+    return UserDb(name: snapshot.get('name'), pictureId: snapshot.get('pictureId'));
   }
 }

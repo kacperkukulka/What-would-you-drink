@@ -20,10 +20,9 @@ class SettingsForm extends StatefulWidget {
 
 class _SettingsFormState extends State<SettingsForm> {
   String? currentName;
-  late String nameBefore;
   var formKey = GlobalKey<FormState>();
   int currentAvatar = 0;
-  List avatarList = List.generate(10, (_) => Random().nextInt(999999));
+  List avatarList = List.generate(10, (_) => Random().nextInt(picMaxNum));
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +31,8 @@ class _SettingsFormState extends State<SettingsForm> {
       builder: (context, snapshot) {
         if(snapshot.hasData){
           UserDb userDb = snapshot.data!;
-          nameBefore = userDb.name;
-
+          currentName = userDb.name;
+          avatarList[0] = userDb.pictureId;
           return Container(
             margin: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 40.0, top: 20.0),
             child: Form(
@@ -45,8 +44,7 @@ class _SettingsFormState extends State<SettingsForm> {
                     initialValue: userDb.name,
                     decoration: textInputDecoration,
                     validator: (val) => 
-                      val!.isEmpty ? 'Please enter a name' : 
-                      val == nameBefore ? 'You entered the same name' : null,
+                      val!.isEmpty ? 'Please enter a name' : null,
                     onChanged: (val) => currentName = val,
                   ),
                   const SizedBox(height: 10.0,),
@@ -78,7 +76,8 @@ class _SettingsFormState extends State<SettingsForm> {
                       if(formKey.currentState == null) return;
                       if(formKey.currentState!.validate()){
                         Navigator.pop(context);
-                        await UserService(uid: Provider.of<LightUser?>(context, listen: false)!.uid).addOrUpdate(name: currentName!);
+                        await UserService(uid: Provider.of<LightUser?>(context, listen: false)!.uid)
+                          .addOrUpdate(name: currentName!, pictureId: avatarList[currentAvatar]);
                       }
                     }, 
                     child: const Text('Zapisz')

@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:what_would_you_drink/models/light_user.dart';
+import 'package:what_would_you_drink/models/user.dart';
 import 'package:what_would_you_drink/services/user_service.dart';
 
 class AuthService {
@@ -52,6 +55,7 @@ class AuthService {
       if(user != null){
         await UserService(uid: user.uid).addOrUpdate(
           name: user.email!.split('@')[0],
+          pictureId: Random().nextInt(picMaxNum)
         );
       }
       return _lightUserFromUser(user);
