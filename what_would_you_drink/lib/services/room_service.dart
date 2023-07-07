@@ -55,7 +55,8 @@ class RoomService {
         "strength" : 400,
         "sugars" : 4,
         "type" : "coffee",
-        "userId" : userId
+        "userId" : userId,
+        "milk" : 0
       });
     }
   }

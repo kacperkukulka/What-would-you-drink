@@ -3,6 +3,7 @@ class Brew{
   final int sugars;
   final int strength;
   final bool isActual;
+  final int milk;
   final String userId;
   final String? roomId;
 
@@ -11,6 +12,7 @@ class Brew{
     required this.sugars, 
     required this.strength,
     required this.isActual,
+    required this.milk,
     required this.userId,
     required this.roomId
   });
@@ -29,5 +31,20 @@ class Brew{
         break;
     }
     return "$sugars $spoon cukru";
+  }
+
+  String description(){
+    late String description;
+    switch (type) {
+      case 'tea': description = "Herbata"; break;
+      case 'coffee': description = "Kawa(dowolna)"; break;
+      case 'loose_coffee': description = "Kawa sypana"; break;
+      case 'instant_coffee': description = "Kawa rozpuszczalna"; break;
+      default: description = "Błąd"; break;
+    }
+
+    description += ", $milk% mleka, ${sugarStringPL()}";
+    
+    return description;
   }
 }

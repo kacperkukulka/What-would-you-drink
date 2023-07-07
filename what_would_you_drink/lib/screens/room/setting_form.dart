@@ -6,6 +6,7 @@ import 'package:what_would_you_drink/services/brew_service.dart';
 import 'package:what_would_you_drink/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:what_would_you_drink/displayData/data_colors.dart' as dc;
+import '../../shared/brew_types.dart';
 
 class SettingsForm extends StatefulWidget {
   const SettingsForm({super.key, required this.roomId});
@@ -17,11 +18,12 @@ class SettingsForm extends StatefulWidget {
 }
 
 class _SettingsFormState extends State<SettingsForm> {
-  int? currentStrength;
+  int? currentMilk;
   int? currentSugars;
   String? currentName;
+  String dropdownVal = brewTypes.entries.first.key;
   var formKey = GlobalKey<FormState>();
-
+  
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Brew>(
@@ -36,16 +38,16 @@ class _SettingsFormState extends State<SettingsForm> {
               key: formKey,
               child: Column(
                 children: [
-                  textForm(text: 'Jak mocna?'),
+                  textForm(text: 'Ilość mleka'),
                   Slider(
-                    value: (currentStrength ?? userBrew.strength).toDouble(),
-                    min: 100,
-                    max: 800,
-                    divisions: 7,
-                    activeColor: Colors.brown[(currentStrength ?? userBrew.strength)],
+                    value: (currentMilk ?? userBrew.milk).toDouble(),
+                    min: 0,
+                    max: 100,
+                    divisions: 20,
+                    label: "${(currentMilk ?? userBrew.milk)}%",
                     onChanged: (v){
-                      setState(() => currentStrength = v.toInt());
-                    }
+                      setState(() => currentMilk = v.toInt());
+                    },
                   ),
                   textForm(text: 'Ilość cukru (łyżeczek)'),
                   Slider(
@@ -56,7 +58,20 @@ class _SettingsFormState extends State<SettingsForm> {
                     onChanged: (v){
                       setState(() => currentSugars = v.toInt());
                     },
-                    label: currentSugars.toString(),
+                    label: (currentSugars ?? userBrew.sugars).toString(),
+                  ),
+                  textForm(text: 'Typ naparu'),
+                  DropdownButton(
+                    value: dropdownVal,
+                    items: brewTypes.entries.map((e) => 
+                        DropdownMenuItem(
+                          value: e.key,
+                          child: Text(e.value),
+                        )
+                      ).toList(),
+                    onChanged: (e){
+                      setState(() { dropdownVal = e!; });
+                    }
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -99,8 +114,9 @@ class _SettingsFormState extends State<SettingsForm> {
                             Navigator.pop(context);
                             await brewService.update(newValues: {
                               'sugars': currentSugars ?? userBrew.sugars, 
-                              'strength': currentStrength ?? userBrew.strength,
-                              'isActual': true
+                              'milk': currentMilk ?? userBrew.milk,
+                              'isActual': true,
+                              'type': dropdownVal
                             });
                           }
                         }, 

@@ -60,7 +60,8 @@ class BrewService {
           type: s.get('type') ?? 'coffee',
           userId: s.get('userId') ?? userId,
           strength: s.get('strength') ?? 0,
-          sugars: s.get('sugars') ?? '0'
+          sugars: s.get('sugars') ?? '0',
+          milk: s.get('milk') ?? 0,
         )  
       )
       .toList();
@@ -74,7 +75,8 @@ class BrewService {
       roomId: data.get('roomId'),
       strength: data.get('strength'),
       sugars: data.get('sugars'),
-      type: data.get('type')
+      type: data.get('type'),
+      milk: data.get('milk')
     );
   }
 }
